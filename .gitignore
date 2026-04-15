@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+dist/
+.vite/
+*.log
+npm-debug.log*
+
+# Env & secrets
+.env
+.env.local
+*.key
+
+# SQLite (scraped content is user-generated; keep out of git)
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+
+# Scraper cache (raw HTML pulled from source sites)
+data/cache/
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
