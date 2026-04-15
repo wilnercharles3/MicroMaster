@@ -6,6 +6,8 @@ from datetime import datetime, timezone
 from flask import Blueprint, abort, request
 from sqlalchemy import select
 
+from sqlalchemy.orm import Session
+
 from scraper.db import BookChapter
 
 from ..config import DEFAULT_USER_ID, XP_LEARN_DOSE_COMPLETE
@@ -17,7 +19,7 @@ from ._util import db_route, ok
 bp = Blueprint("micro_doses", __name__)
 
 
-def _dose_payload(session, dose: MicroDose) -> dict:
+def _dose_payload(session: Session, dose: MicroDose) -> dict:
     prog = session.scalar(
         select(UserProgress).where(
             UserProgress.user_id == DEFAULT_USER_ID,
@@ -25,9 +27,12 @@ def _dose_payload(session, dose: MicroDose) -> dict:
             UserProgress.node_id == dose.id,
         )
     )
+    ch = session.get(BookChapter, dose.chapter_id)
     return {
         "id": dose.id,
         "chapter_id": dose.chapter_id,
+        "chapter_number": ch.number if ch else None,
+        "chapter_title": ch.title if ch else None,
         "section_id": dose.section_id,
         "order_index": dose.order_index,
         "title": dose.title,

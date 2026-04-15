@@ -16,13 +16,14 @@ Both titles are published by the author under Creative Commons licenses for non-
 Under construction. Built phase by phase:
 
 - [x] Phase 1: Project scaffold
-- [ ] Phase 2: Dual-source scraper (book + workbook) into SQLite
-- [ ] Phase 3: Flask backend API
-- [ ] Phase 4: Micro-dose lesson viewer with code sandbox
-- [ ] Phase 5: React frontend scaffold
-- [ ] Phase 6: Roadmap UI (24-chapter visual map)
-- [ ] Phase 7: Pyodide sandbox + quiz + teach-back UI
-- [ ] Phase 8: Gamification (XP, levels, streaks, achievements)
+- [x] Phase 2: Dual-source PDF scraper into SQLite
+- [x] Phase 3: Flask backend API with micro-dose builder and XP scoring
+- [x] Phase 4: React frontend scaffold + chapter grid + micro-dose viewer with copy-to-run sandbox
+- [ ] Phase 5: Roadmap UI (24-chapter visual map)
+- [ ] Phase 6: Pyodide sandbox upgrade
+- [ ] Phase 7: Quiz + teach-back UI
+- [ ] Phase 7b: Vocab and syntax challenges (third node type)
+- [ ] Phase 8: Gamification UI (XP bar, levels, streaks, achievements)
 - [ ] Phase 9: ADHD features (session timer, focus mode, just-one-more, daily goals)
 - [ ] Phase 10: Claude API integration for teach-back evaluation
 
@@ -45,7 +46,39 @@ MicroMaster/
 
 ## Quick start
 
-Nothing runs yet. Setup instructions will be added phase by phase.
+From `C:\MicroMaster`, in two separate terminals:
+
+```
+# Terminal 1 - Flask backend on :5057
+.venv\Scripts\python.exe -m backend.run
+
+# Terminal 2 - Vite dev server on :5173
+cd frontend
+npm run dev
+```
+
+Then open <http://localhost:5173>. The Vite dev server proxies `/api/*`
+to the Flask backend, so both dev and production builds share the same
+relative URLs.
+
+First-time setup (one-time):
+
+```
+# Python env (handled by uv; installs a private CPython 3.12)
+uv venv --python 3.12
+uv pip install -r backend/requirements.txt
+
+# Frontend dependencies
+cd frontend && npm install && cd ..
+
+# Put your own copies of the PDFs in data/sources/
+#   data\sources\book.pdf
+#   data\sources\workbook.pdf
+
+# Scrape + build micro-doses
+.venv\Scripts\python.exe -m scraper --book --workbook
+.venv\Scripts\python.exe -m backend.build_doses
+```
 
 ## Development principles
 
