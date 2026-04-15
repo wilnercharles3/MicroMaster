@@ -37,6 +37,11 @@ Each phase lands as a single commit. After each phase, the app is in a testable 
 ## Phase 7: Pyodide sandbox + quiz + teach-back UI
 - React sandbox component. Quiz component. Teach-back textarea.
 
+## Phase 7b: Vocab and syntax challenges
+- Third node type sitting between Learn and Practice (see docs/feature-vocab-syntax.md).
+- Vocab drills on chapter keywords; syntax fill-in-the-blank on chapter code.
+- Orange node on the roadmap; feeds the "random challenge" ADHD feature.
+
 ## Phase 8: Gamification
 - XP, levels (Novice -> Boring Stuff Destroyer), streaks with multipliers, achievements.
 - Weighting: Learn 50%, Practice 35%, Miniproject 15%.

@@ -21,13 +21,16 @@ npm-debug.log*
 .env.local
 *.key
 
-# SQLite (scraped content is user-generated; keep out of git)
+# SQLite (extracted content is personal study aid; keep out of git)
 data/*.db
 data/*.sqlite
 data/*.sqlite3
 
-# Scraper cache (raw HTML pulled from source sites)
+# Scraper cache (raw HTML or intermediate JSON)
 data/cache/
+
+# Source PDFs (user's own copies; do not redistribute)
+data/sources/
 
 # Editor / OS
 .vscode/
